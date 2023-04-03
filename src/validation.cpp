@@ -55,7 +55,6 @@
 #include <util/translation.h>
 #include <validationinterface.h>
 #include <warnings.h>
-#include <hashdb.h>
 
 #include <algorithm>
 #include <cassert>
@@ -1479,14 +1478,6 @@ CAmount GetBlockSubsidy(int nHeight, const Consensus::Params& consensusParams)
         return 0;
 
     CAmount nSubsidy = 50 * COIN;
-              if (nHeight == 1)
-              {
-              nSubsidy = 2580000 * COIN;
-              }
-              else if (nHeight == 939796)
-              {
-              nSubsidy = 18840100 * COIN; // Halving by 2
-              }
     // Subsidy is cut in half every 210,000 blocks which will occur approximately every 4 years.
     nSubsidy >>= halvings;
     return nSubsidy;
@@ -1992,7 +1983,7 @@ bool Chainstate::ConnectBlock(const CBlock& block, BlockValidationState& state, 
     AssertLockHeld(cs_main);
     assert(pindex);
 
-    uint256 block_hash{phashdb->GetHash(block)};
+    uint256 block_hash{block.GetHash()};
     assert(*pindex->phashBlock == block_hash);
 
     int64_t nTimeStart = GetTimeMicros();
@@ -3323,7 +3314,7 @@ void Chainstate::ReceivedBlockTransactions(const CBlock& block, CBlockIndex* pin
 static bool CheckBlockHeader(const CBlockHeader& block, BlockValidationState& state, const Consensus::Params& consensusParams, bool fCheckPOW = true)
 {
     // Check proof of work matches claimed amount
-    if (fCheckPOW && !CheckProofOfWork(phashdb->GetHash(block), block.nBits, consensusParams))
+    if (fCheckPOW && !CheckProofOfWork(block.GetHash(), block.nBits, consensusParams))
         return state.Invalid(BlockValidationResult::BLOCK_INVALID_HEADER, "high-hash", "proof of work failed");
 
     return true;
@@ -3603,7 +3594,7 @@ bool ChainstateManager::AcceptBlockHeader(const CBlockHeader& block, BlockValida
     AssertLockHeld(cs_main);
 
     // Check for duplicate
-    uint256 hash = phashdb->GetHash(block);
+    uint256 hash = block.GetHash();
     BlockMap::iterator miSelf{m_blockman.m_block_index.find(hash)};
     if (hash != GetConsensus().hashGenesisBlock) {
         if (miSelf != m_blockman.m_block_index.end()) {
@@ -3618,7 +3609,6 @@ bool ChainstateManager::AcceptBlockHeader(const CBlockHeader& block, BlockValida
             return true;
         }
 
-        // IBD: do not check PoW (Yespower and Yescrypt) during Download headers for performance reason
         if (!CheckBlockHeader(block, state, GetConsensus())) {
             LogPrint(BCLog::VALIDATION, "%s: Consensus::CheckBlockHeader: %s, %s\n", __func__, hash.ToString(), state.ToString());
             return false;
@@ -4372,7 +4362,7 @@ void Chainstate::LoadExternalBlockFile(
                 blkdat >> block;
                 nRewind = blkdat.GetPos();
 
-                uint256 hash = phashdb->GetHash(block);
+                uint256 hash = block.GetHash();
                 {
                     LOCK(cs_main);
                     // detect out of order blocks, and store them for later

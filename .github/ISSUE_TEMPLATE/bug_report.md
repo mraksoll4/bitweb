@@ -9,7 +9,7 @@ assignees: ''
 
 <!-- This issue tracker is only for technical issues related to Bitweb Core.
 
-For reporting security issues, please use https://github.com/bitweb-project/bitweb/issues
+For reporting security issues, please use https://github.com/mraksoll4/bitweb/issues
 
 If the node is "stuck" during sync or giving "block checksum mismatch" errors, please ensure your hardware is stable by running memtest and observe CPU temperature with a load-test tool such as linpack before creating an issue! -->
 

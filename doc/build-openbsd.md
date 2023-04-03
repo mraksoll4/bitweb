@@ -20,7 +20,7 @@ See [dependencies.md](dependencies.md) for a complete overview.
 ### 2. Clone Bitweb Repo
 Clone the Bitweb Core repository to a directory. All build scripts and commands will run from this directory.
 ``` bash
-git clone https://github.com/bitweb-project/bitweb.git
+git clone https://github.com/mraksoll4/bitweb.git
 ```
 
 ### 3. Install Optional Dependencies

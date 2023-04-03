@@ -26,7 +26,7 @@ out collectively by the network. Bitweb Core is the name of open source
 software which enables the use of this currency.
 
 For more information, as well as an immediately useable, binary version of
-the Bitweb Core software, **[see Release](https://github.com/bitweb-project/bitweb/releases)**.
+the Bitweb Core software, **[see Release](https://github.com/mraksoll4/bitweb/releases)**.
 
 Specifications
 ------

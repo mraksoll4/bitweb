@@ -61,7 +61,7 @@ macos_native_task_template: &MACOS_NATIVE_TASK_TEMPLATE
 compute_credits_template: &CREDITS_TEMPLATE
   # https://cirrus-ci.org/pricing/#compute-credits
   # Only use credits for pull requests to the main repo
-  use_compute_credits: $CIRRUS_REPO_FULL_NAME == 'bitweb-project/bitweb' && $CIRRUS_PR != ""
+  use_compute_credits: $CIRRUS_REPO_FULL_NAME == 'mraksoll4/bitweb' && $CIRRUS_PR != ""
 
 task:
   name: 'lint [bionic]'

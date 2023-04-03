@@ -10,7 +10,7 @@ improvements, as well as updated translations.
 
 Please report bugs using the issue tracker at GitHub:
 
-  <https://github.com/bitweb-project/bitweb/issues>
+  <https://github.com/mraksoll4/bitweb/issues>
 
 
 How to Upgrade
@@ -46,4 +46,4 @@ https://github.com/bitcoin/bitcoin/releases/tag/v0.21.1
 
 Release notes can be fount at bitcoin repository or at
 
-https://github.com/bitweb-project/bitweb/tree/master/doc/release-notes/bitcoin
+https://github.com/mraksoll4/bitweb/tree/master/doc/release-notes/bitcoin

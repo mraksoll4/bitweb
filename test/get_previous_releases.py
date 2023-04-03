@@ -156,7 +156,7 @@ def download_binary(tag, args) -> int:
 
 
 def build_release(tag, args) -> int:
-    githubUrl = "https://github.com/bitweb-project/bitweb"
+    githubUrl = "https://github.com/mraksoll4/bitweb"
     if args.remove_dir:
         if Path(tag).is_dir():
             shutil.rmtree(tag)
